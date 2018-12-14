@@ -1,0 +1,69 @@
+﻿@model FlashPoints.Models.UserProfileViewModel
+
+@{
+    ViewData["Title"] = "My Profile";
+}
+<br />
+<h1>@Model.User.FirstName @Model.User.LastName</h1>
+@if (Model.User.IsAdmin)
+{
+    <h4>Administrator</h4>
+} else
+{
+    <h4>Student</h4>
+}
+
+<div text-align: left;>
+    <hr style="border: 1px solid #f0b310; margin-right:34px">
+    <dl class="data_table">
+        <dt>
+            @Html.DisplayNameFor(model => model.User.Email)
+        </dt>
+        <dd>
+            @Html.DisplayFor(model => model.User.Email)
+        </dd>
+        <dt>
+            @Html.DisplayNameFor(model => model.User.Points)
+        </dt>
+        <dd>
+            @Html.DisplayFor(model => model.User.Points)
+        </dd>
+        <br />
+        <hr style="border: 1px solid #f0b310; margin-right:34px">
+        <dt>
+            Events Attended
+        </dt>
+        <dd>
+            @if (Model.Events.Count() == 0)
+            {
+                <p>None yet!</p>
+            }
+            else
+            {
+                @foreach (Event ev in Model.Events)
+                {
+                    <p><a asp-controller="Events" asp-action="Details" asp-route-id="@ev.ID">@ev.Title</a></p>
+                    <br />
+                }
+            }
+        </dd>
+        <hr style="border: 1px solid #f0b310; margin-right:34px">
+        <dt>
+            Prizes Redeemed
+        </dt>
+        <dd>
+            @if (Model.Events.Count() == 0)
+            {
+                <p>None yet!</p>
+            }
+            else
+            {
+                @foreach (Prize prize in Model.Prizes)
+                {
+                    <p><a asp-controller="Prizes" asp-action="Details" asp-route-id="@prize.ID">@prize.Title</a></p>
+                    <br />
+                }
+            }
+        </dd>
+    </dl>
+</div>

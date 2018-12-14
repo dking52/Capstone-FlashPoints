@@ -1,0 +1,65 @@
+﻿@model FlashPoints.Models.Event
+
+@{
+    ViewData["Title"] = "Event Details";
+}
+
+<h2>@Model.Title</h2>
+
+<div>
+    <h4>Details</h4>
+    <hr style="border: 1px solid #f0b310; margin-right:34px">
+    <dl class="dl-horizontal">
+        <dt>
+            @Html.DisplayNameFor(model => model.Location)
+        </dt>
+        <dd>
+            @Html.DisplayFor(model => model.Location)
+        </dd>
+        <dt>
+            Begins
+        </dt>
+        <dd>
+            @Html.DisplayFor(model => model.StartDateTime)
+        </dd>
+        <dt>
+            Ends
+        </dt>
+        <dd>
+            @Html.DisplayFor(model => model.EndDateTime)
+        </dd>
+        <dt>
+            Point Value
+        </dt>
+        <dd>
+            @Html.DisplayFor(model => model.PointValue)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Creator)
+        </dt>
+        <dd>
+            @Html.DisplayFor(model => model.Creator)
+        </dd>
+
+    </dl>
+    <hr style="border: 1px solid #f0b310; margin-right:34px">
+    @if (ViewBag.isAdmin == true || Model.Creator == User.Identity.Name)
+    {
+        <h4>Administrator Options</h4>
+        @Html.ActionLink("Print Event QR Code", "QRCode", new { id = Model.ID }, new { @class = "btn btn-primary btn-large" }
+                       )
+        <br />
+        <br />
+
+        <a asp-action="Edit" asp-route-id="@Model.ID">Edit Event</a>
+    }
+
+    <br />
+    <br />
+    <br />
+</div>
+<div>
+    
+    <a asp-action="Index">Back to List</a>
+</div>

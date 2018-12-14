@@ -1,0 +1,33 @@
+﻿@model FlashPoints.Models.Event
+
+@{
+    Layout = "";
+}
+
+@{
+    ViewData["Title"] = "QR Code";
+}
+
+<style>
+    #inner {
+        width: 50%;
+        margin: 0 auto;
+    }
+</style>
+
+<br />
+<br />
+<br />
+<div id="inner">
+    <h1>@Model.Title</h1>
+    <h4>Begins: @Model.StartDateTime</h4>
+    <h4>Ends: @Model.EndDateTime</h4>
+    <h2>@Model.PointValue Points</h2>
+    <br />
+    @if (ViewBag.QRCodeImage != null)
+    {
+        <img src="@ViewBag.QRCodeImage" alt="" style="height:500px;width:500px" />
+    }
+
+</div>
+

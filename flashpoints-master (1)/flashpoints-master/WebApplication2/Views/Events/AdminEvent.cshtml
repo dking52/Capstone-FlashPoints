@@ -1,0 +1,55 @@
+﻿@model FlashPoints.Models.Event
+
+@{
+    ViewData["Title"] = "Add Event";
+}
+
+<h2>Add Event to Calendar</h2>
+
+<hr style="border: 1px solid #f0b310; margin-right:34px">
+<div class="row">
+    <div class="col-md-4">
+        <form asp-action="AdminEvent">
+            <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+            <div class="form-group">
+                <label asp-for="Title" class="control-label">Event Title</label>
+                <input asp-for="Title" class="form-control" />
+                <span asp-validation-for="Title" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="Location" class="control-label"></label>
+                <input asp-for="Location" class="form-control" />
+                <span asp-validation-for="Location" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="StartDateTime" class="control-label">Start Date & Time</label>
+                <input asp-for="StartDateTime" class="form-control" />
+                <span asp-validation-for="StartDateTime" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="EndDateTime" class="control-label">End Date & Time</label>
+                <input asp-for="EndDateTime" class="form-control" />
+                <span asp-validation-for="EndDateTime" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="PointValue" class="control-label">Point Value</label>
+                <input asp-for="PointValue" class="form-control" />
+                <span asp-validation-for="PointValue" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <input type="hidden" asp-for="Creator" class="form-control" value="@User.Identity.Name"/>
+                <span asp-validation-for="Creator" class="text-danger"></span>
+            </div>
+            <br />
+            <div class="form-group">
+                <input type="submit" value="Add Event" class="btn btn-default" />
+            </div>
+        </form>
+    </div>
+</div>
+<br />
+
+<div>
+    <a asp-action="Index">Back to List</a>
+</div>
+

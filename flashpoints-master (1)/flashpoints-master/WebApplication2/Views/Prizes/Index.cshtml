@@ -1,0 +1,62 @@
+﻿@model PrizeIndexViewModel
+
+@{
+    ViewData["Title"] = "Index";
+}
+
+<div class="row">
+    <div class="col-sm-6 left-block" style="float:none">
+        <br />
+        <h2>Prize Catalog</h2>
+        <h3>Your current point balance: <strong>@Model.user.Points</strong></h3>
+        @*<p>Use your points to redeem a prize</p>*@
+        <br />
+    </div>
+</div>
+
+@foreach (var item in Model.prizes)
+{
+    PrizeRedeemed rdm;
+    try
+    {
+        rdm = Model.user.PrizesRedeemed.Where(u => u.User.Email == User.Identity.Name && u.PrizeID == item.ID).First();
+    }
+    catch
+    {
+        rdm = null;
+    }
+    <div class="row">
+        <div class="col-md-6 left-block" style="float:none">
+            <h3>@item.Title</h3>
+            <a asp-action="Details" asp-route-id="@item.ID" class="text-center"><img src="~/images/prizes/@item.ImagePath" class="center-block img-responsive" /></a>
+            <br />
+            <div class="row">
+                <div class="col-sm-4">
+                    @if (rdm != null)
+                    {
+                        <p><strike><strong>@item.PointPrice Points</strong></strike></p>
+                    }
+                    else
+                    {
+                        <p><strong>@item.PointPrice Points</strong></p>
+                    }
+
+                </div>
+                <div class="col-sm-4">
+                    <p>  </p>
+                </div>
+                <div class="col-sm-4">
+                    @if (rdm != null)
+                    {
+                        <p style="color:green"><strong>Redeemed ✓</strong></p>
+                    }
+                    else
+                    {
+                        <p style="color:red"><strong>Not yet redeemed</strong></p>
+                    }
+                </div>
+            </div>
+
+        </div>
+    </div>
+}

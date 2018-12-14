@@ -1,0 +1,61 @@
+﻿@model FlashPoints.Models.Event
+
+@{
+    ViewData["Title"] = "New Event Request";
+}
+<br />
+<h2>New Event Request</h2>
+
+<h4>Your event will be reviewed by the event coordinators and you'll be notified of its approval!</h4>
+<hr style="border: 1px solid #f0b310; margin-right:30px">
+<div class="row">
+    <div class="col-md-4">
+        <form asp-action="Create">
+            <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+            <div class="form-group">
+                <label asp-for="Title" class="control-label">Event Title</label>
+                <input asp-for="Title" class="form-control" />
+                <span asp-validation-for="Title" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="Location" class="control-label"></label>
+                <input asp-for="Location" class="form-control" />
+                <span asp-validation-for="Location" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="StartDateTime" class="control-label">Start Date & Time</label>
+                <input asp-for="StartDateTime" class="form-control" />
+                <span asp-validation-for="StartDateTime" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="EndDateTime" class="control-label">End Date & Time</label>
+                <input asp-for="EndDateTime" class="form-control" />
+                <span asp-validation-for="EndDateTime" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="PointValue" class="control-label">Point Value</label>
+                <input asp-for="PointValue" class="form-control" />
+                <span asp-validation-for="PointValue" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <input type="hidden" asp-for="Creator" class="form-control" value="@User.Identity.Name" />
+                <span asp-validation-for="Creator" class="text-danger"></span>
+            </div>
+
+            <br />
+            <div class="form-group">
+                <input type="submit" value="Submit Event Request" class="btn btn-default" />
+            </div>
+        </form>
+    </div>
+</div>
+
+<br />
+<br />
+<div>
+    <a asp-action="Index">Back to Event Calendar</a>
+</div>
+
+@section Scripts {
+    @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
+}
